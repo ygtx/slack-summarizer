@@ -240,7 +240,7 @@ class SlackClient:
                            exception=SlackApiError)
             channels_info = [
                 channel for channel in result['channels']
-                if not channel["is_archived"] and channel["is_channel"]
+                if not channel["is_archived"] and channel["is_channel"] and channel["name"] != "#02-all-team-daily"
             ]
             channels_info = sort_by_numeric_prefix(channels_info,
                                                    get_key=lambda x: x["name"])
