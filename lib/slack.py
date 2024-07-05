@@ -233,6 +233,9 @@ class SlackClient:
                 ...
             }
         """
+
+        exclude_channels = {"#02-all-team-daily"}
+        
         try:
             self._wait_api_call()
             result = retry(lambda: self.client.conversations_list(
@@ -240,7 +243,7 @@ class SlackClient:
                            exception=SlackApiError)
             channels_info = [
                 channel for channel in result['channels']
-                if not channel["is_archived"] and channel["is_channel"] and channel["name"] != "#02-all-team-daily"
+                if not channel["is_archived"] and channel["is_channel"] and channel["name"] not in exclude_channels
             ]
             channels_info = sort_by_numeric_prefix(channels_info,
                                                    get_key=lambda x: x["name"])
