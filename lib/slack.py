@@ -234,7 +234,7 @@ class SlackClient:
             }
         """
 
-        exclude_channels = {"#02-all-team-daily"}
+        exclude_channels = {"02-all-team-daily"}
         
         try:
             self._wait_api_call()
